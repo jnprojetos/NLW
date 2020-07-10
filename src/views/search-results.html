@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% set pageId = "page-search-results" %}
+
+{% block title %}
+    <title>Criar um ponto de coleta</title>
+{% endblock title %}
+
+{% block styles %}
+    <link rel="stylesheet" href="css/search-results.css">
+{% endblock styles %}
+
+{% block content %}
+    <!--Inclusão da parte page-header com a utilização no template engine nunjucks-->
+    {% include "partes/page-header.html" %}
+
+    <main>
+        <h4><strong>{{ total }}</strong>Encontrados</h4>
+
+        <div class="cards">
+
+            <!-- Estrutura de repetição para criar os cards dinamicamente. -->
+            <!-- "place" é variavel do "places" que é um objeto e vem do banco de dados. -->
+            {% for place in places %}
+                <div class="card">
+                    <img src="{{ place.image }}" alt="{{ place.name }}">
+                    <h1>{{ place.name }}</h1>
+                    <h3>{{ place.items }}</h3>
+                    <p>
+                        {{ place.city }}, {{ place.state }}
+                        <br>
+                            {{ place.adress }}
+                        </br>
+                        {{ place.adress2 }}
+                    </p>
+                </div>
+            {% endfor %}
+            
+        </div>
+    </main>
+{% endblock content %}
+
+{% block scripts %}
+    <script src="/js/create-point.js"></script>
+{% endblock scripts %}
